@@ -1,14 +1,16 @@
 ﻿@model U7L4.Models.RedditSimpleResponse
 
-<p>This is the response from Reddit</p>
-<p>Kind:  @Model.kind</p>
 @{
-    if (@Model.data.children?.Length > 0)
+    for (int i = 0; i < @Model.data.children.Count(); i++)
     {
-<p>The first articles title is: @Model.data.children[0].data.title</p>
-<br/>
-<p>The first image for the first article is:</p>
-<br/>
-<img src="@Model.data.children[0].data.link_flair_richtext[0].u" />
+        <div class="row">
+            <p>@Model.data.children[i].data.title</p>
+        @foreach (var currLink in @Model.data.children[i].data.link_flair_richtext)
+        {
+            <p style="padding-left: 75px">@Model.data.children[i].data.link_flair_richtext[i].a</p>
+            <p style="padding-left: 75px">@Model.data.children[i].data.link_flair_richtext[i].e</p>
+            <img  style="width: 300px; height: 150px; padding-left: 75px" src="@Model.data.children[i].data.link_flair_richtext[i].u"/>
+        }
+        </div>
     }
 }
